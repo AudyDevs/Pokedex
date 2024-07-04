@@ -23,4 +23,12 @@ class DataStoreRepositoryImpl @Inject constructor(
     override suspend fun savePokemonType(pokemonType: String) {
         dataStorePreferences.saveDataStorePokemonType(pokemonType)
     }
+
+    override suspend fun readColumnsList(): Int {
+        return dataStorePreferences.readDataStoreColumnsList()
+    }
+
+    override suspend fun saveColumnsList(columnsList: Int) {
+        dataStorePreferences.saveDataStoreColumnsList(columnsList)
+    }
 }

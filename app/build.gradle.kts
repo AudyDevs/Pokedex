@@ -53,6 +53,12 @@ dependencies {
     //Datastore preferences
     implementation(libs.androidx.datastore.preferences)
 
+    //Glide
+    implementation(libs.glide)
+
+    //Glide
+    implementation(libs.android.lottie)
+
     //DaggerHilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

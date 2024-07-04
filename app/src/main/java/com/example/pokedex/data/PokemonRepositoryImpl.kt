@@ -7,11 +7,13 @@ import com.example.pokedex.data.room.dao.PokemonDao
 import com.example.pokedex.data.room.entities.AbilityEntity
 import com.example.pokedex.di.Constants.BIG_IMAGE
 import com.example.pokedex.di.Constants.DDD_IMAGE
+import com.example.pokedex.di.Constants.LIMIT_POKEMON_LIST
 import com.example.pokedex.di.Constants.LITTLE_IMAGE
 import com.example.pokedex.di.Constants.POKEMON_LIMIT
 import com.example.pokedex.di.Constants.POKEMON_OFFSET
 import com.example.pokedex.domain.PokemonRepository
 import com.example.pokedex.domain.model.AbilityModel
+import com.example.pokedex.domain.model.EvolutionModel
 import com.example.pokedex.domain.model.PokemonInfoModel
 import com.example.pokedex.domain.model.PokemonListModel
 import com.example.pokedex.domain.model.PokemonModel
@@ -42,6 +44,7 @@ class PokemonRepositoryImpl @Inject constructor(
                     }
                 }
             }
+            apiPokemonResponse.pokemon = apiPokemonResponse.pokemon.filter { it.id <= LIMIT_POKEMON_LIST }
             //Clear and save again the values.
             pokemonDao.clearPokemon()
             pokemonDao.clearType()
@@ -117,17 +120,16 @@ class PokemonRepositoryImpl @Inject constructor(
         val apiTypeModel = getAPIType(namePokemon)
         val apiAbilitiesModel = getAPIAbility(apiPokemonModel?.abilities ?: emptyList())
         val apiSpeciesModel = getAPISpecies(namePokemon)
+        val apiEvolutionModel = getAPIEvolution(apiSpeciesModel?.idEvolutionChain ?: "")
 
-//        val apiEvolutionModel = apiSpeciesModel?.idEvolutionChain ?: ""
-
-        if (apiPokemonModel != null && apiTypeModel != null && apiAbilitiesModel != null && apiSpeciesModel != null) {
+        if (apiPokemonModel != null && apiTypeModel != null && apiAbilitiesModel != null && apiSpeciesModel != null && apiEvolutionModel != null) {
             val pokemonModel = PokemonModel(
                 apiPokemonModel,
                 apiTypeModel,
                 apiAbilitiesModel,
-                apiSpeciesModel
+                apiSpeciesModel,
+                apiEvolutionModel
             )
-
             return PokemonInfoState.Success(pokemonModel)
         }
         return PokemonInfoState.Error
@@ -260,6 +262,60 @@ class PokemonRepositoryImpl @Inject constructor(
             pokemonDao.clearSpecies()
             pokemonDao.insertSpecies(apiPokemonSpeciesResponse.toRoom())
             return apiPokemonSpeciesResponse
+        }.onFailure {
+            return null
+        }
+        return null
+    }
+
+    private suspend fun getAPIEvolution(idEvolutionChain: String): List<EvolutionModel>? {
+        val roomEvolutionResponse = pokemonDao.getEvolution(idEvolutionChain)
+        if (roomEvolutionResponse.isNotEmpty()) {
+            return roomEvolutionResponse.map { it.toDomain() }
+        }
+        runCatching {
+            pokemonApiService.getEvolution(idEvolutionChain)
+        }.onSuccess { pokemonEvolutionResponse ->
+            val apiEvolutionResponse = mutableListOf<EvolutionModel>()
+            pokemonEvolutionResponse.chain.evolvesTo.forEach { evolvesToFirst ->
+                apiEvolutionResponse.add(
+                    EvolutionModel(
+                        id = 0,
+                        idEvolution = idEvolutionChain,
+                        namePokemon = pokemonEvolutionResponse.chain.species.name,
+                        idPokemonEvolution = extractIdUrl(evolvesToFirst.species.url),
+                        nameEvolution = evolvesToFirst.species.name,
+                        itemEvolution = evolvesToFirst.evolutionDetails[0].item.name,
+                        minLevel = evolvesToFirst.evolutionDetails[0].minLevel,
+                        trigger = evolvesToFirst.evolutionDetails[0].trigger.name,
+                        happiness = evolvesToFirst.evolutionDetails[0].minHappiness,
+                        timeOfDay = evolvesToFirst.evolutionDetails[0].timeOfDay,
+                        location = evolvesToFirst.evolutionDetails[0].location.name
+                    )
+                )
+                evolvesToFirst.evolvesTo.forEach { evolvesToSecond ->
+                    apiEvolutionResponse.add(
+                        EvolutionModel(
+                            id = 0,
+                            idEvolution = idEvolutionChain,
+                            namePokemon = evolvesToFirst.species.name,
+                            idPokemonEvolution = extractIdUrl(evolvesToSecond.species.url),
+                            nameEvolution = evolvesToSecond.species.name,
+                            itemEvolution = evolvesToSecond.evolutionDetails[0].item.name,
+                            minLevel = evolvesToSecond.evolutionDetails[0].minLevel,
+                            trigger = evolvesToSecond.evolutionDetails[0].trigger.name,
+                            happiness = evolvesToSecond.evolutionDetails[0].minHappiness,
+                            timeOfDay = evolvesToSecond.evolutionDetails[0].timeOfDay,
+                            location = evolvesToSecond.evolutionDetails[0].location.name
+                        )
+                    )
+                }
+            }
+
+            //Clear and save again the values.
+            pokemonDao.clearEvolution()
+            pokemonDao.insertEvolution(apiEvolutionResponse.map { it.toRoom() })
+            return apiEvolutionResponse
         }.onFailure {
             return null
         }

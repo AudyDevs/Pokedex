@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.pokedex.data.room.entities.AbilityEntity
+import com.example.pokedex.data.room.entities.EvolutionEntity
 import com.example.pokedex.data.room.entities.PokemonEntity
 import com.example.pokedex.data.room.entities.PokemonInfoEntity
 import com.example.pokedex.data.room.entities.SpeciesEntity
@@ -62,4 +63,14 @@ interface PokemonDao {
 
     @Query("DELETE FROM species")
     suspend fun clearSpecies()
+
+    // Evolution
+    @Query("SELECT * FROM evolution WHERE idEvolution = :idEvolutionChain")
+    suspend fun getEvolution(idEvolutionChain: String): List<EvolutionEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertEvolution(evolutionList: List<EvolutionEntity>)
+
+    @Query("DELETE FROM evolution")
+    suspend fun clearEvolution()
 }

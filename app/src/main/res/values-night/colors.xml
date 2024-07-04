@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--App Basics-->
+    <color name="background">#FF000000</color>
+    <color name="error">#D13135</color>
+    <color name="buttonAllTypes">#80838283</color>
+    <color name="text">#FFFFFFFF</color>
+    <color name="textList">#FF000000</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+    <!--Background Types Pokemon-->
+    <color name="background_bug">#B1D370</color>
+    <color name="background_dark">#968CA6</color>
+    <color name="background_dragon">#6FA7D8</color>
+    <color name="background_electric">#FBE683</color>
+    <color name="background_fairy">#EFBEEC</color>
+    <color name="background_fighting">#CA768F</color>
+    <color name="background_fire">#FBCEAE</color>
+    <color name="background_flying">#B0C0E3</color>
+    <color name="background_ghost">#818FBA</color>
+    <color name="background_grass">#96CF90</color>
+    <color name="background_ground">#E3AD93</color>
+    <color name="background_ice">#A8DFD7</color>
+    <color name="background_normal">#B8C4CF</color>
+    <color name="background_poison">#CFA3E3</color>
+    <color name="background_psychic">#F6ABAD</color>
+    <color name="background_rock">#DACEAC</color>
+    <color name="background_steel">#A0C1CD</color>
+    <color name="background_water">#8CB5DF</color>
+
+    <!--Basic Color Types Pokemon-->
+    <color name="bug">#FF90C12C</color>
+    <color name="dark">#FF5A5366</color>
+    <color name="dragon">#FF096DC4</color>
+    <color name="electric">#FFF3D23B</color>
+    <color name="fairy">#FFEC8FE6</color>
+    <color name="fighting">#FFCE4069</color>
+    <color name="fire">#FFFF9C54</color>
+    <color name="flying">#FF92AADE</color>
+    <color name="ghost">#FF5269AC</color>
+    <color name="grass">#FF63BB5B</color>
+    <color name="ground">#FFD97746</color>
+    <color name="ice">#FF74CEC0</color>
+    <color name="normal">#FF9099A1</color>
+    <color name="poison">#FFAB6AC8</color>
+    <color name="psychic">#FFF97176</color>
+    <color name="rock">#FFC7B78B</color>
+    <color name="steel">#FF5A8EA1</color>
+    <color name="water">#FF4D90D5</color>
+</resources>

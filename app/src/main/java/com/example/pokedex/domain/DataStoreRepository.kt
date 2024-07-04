@@ -9,4 +9,8 @@ interface DataStoreRepository {
     suspend fun readPokemonType(): String
 
     suspend fun savePokemonType(pokemonType: String)
+
+    suspend fun readColumnsList(): Int
+
+    suspend fun saveColumnsList(columnsList: Int)
 }

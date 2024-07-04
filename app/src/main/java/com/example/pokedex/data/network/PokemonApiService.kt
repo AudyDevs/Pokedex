@@ -1,6 +1,7 @@
 package com.example.pokedex.data.network
 
 import com.example.pokedex.data.network.response.AbilityResponse
+import com.example.pokedex.data.network.response.EvolutionResponse
 import com.example.pokedex.data.network.response.ListResponse
 import com.example.pokedex.data.network.response.PokemonResponse
 import com.example.pokedex.data.network.response.SpeciesResponse
@@ -42,4 +43,10 @@ interface PokemonApiService {
     suspend fun getSpecies(
         @Path("species") species: String,
     ): SpeciesResponse
+
+
+    @GET("evolution-chain/{idEvolution}")
+    suspend fun getEvolution(
+        @Path("idEvolution") idEvolution: String,
+    ): EvolutionResponse
 }

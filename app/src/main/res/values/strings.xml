@@ -1,3 +1,14 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Pokedex</string>
+
+    <!--ToolsText-->
+    <string name="toolsId">#0025</string>
+    <string name="toolsPokemon">Pikachu</string>
+
+    <!--dialogText-->
+    <string name="dialogErrorText" tools:ignore="TypographyEllipsis">Ooops... ha habido un problema. \n \n Pruebe más tarde</string>
+
+    <!--contentDescription-->
+    <string name="cd_icon">Icon</string>
+    <string name="cd_type">Type</string>
 </resources>
