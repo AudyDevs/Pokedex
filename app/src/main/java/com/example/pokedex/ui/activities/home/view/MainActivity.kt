@@ -1,7 +1,7 @@
 package com.example.pokedex.ui.activities.home.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +23,7 @@ import com.example.pokedex.di.Constants.ONE_COLUMN_LIST
 import com.example.pokedex.di.Constants.TWO_COLUMN_LIST
 import com.example.pokedex.domain.model.PokemonListModel
 import com.example.pokedex.domain.state.PokemonListState
+import com.example.pokedex.ui.activities.detail.view.DetailActivity
 import com.example.pokedex.ui.activities.home.adapter.MainAdapter
 import com.example.pokedex.ui.activities.home.viewmodel.MainViewModel
 import com.example.pokedex.ui.dialogs.DialogError
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         mainAdapter = MainAdapter(onItemSelected = { pokemonListModel ->
-            Toast.makeText(this, pokemonListModel.name, Toast.LENGTH_SHORT).show()
+            navigateToDetailActivity(pokemonListModel.id, pokemonListModel.name)
         })
         binding.rvPokemon.apply {
             layoutManager = GridLayoutManager(context, ONE_COLUMN_LIST)
@@ -152,10 +153,10 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.pokemonType.collect {type ->
-                    if (type.isNullOrEmpty()){
+                mainViewModel.pokemonType.collect { type ->
+                    if (type.isNullOrEmpty()) {
                         binding.ivPokemonType.setImageResource(R.drawable.ic_pokeball_grey)
-                    }else{
+                    } else {
                         binding.ivPokemonType.setImageResource(type.iconPokemonType())
                     }
                     updateFilteredList()
@@ -210,5 +211,12 @@ class MainActivity : AppCompatActivity() {
     private fun disableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
         delegate.applyDayNight()
+    }
+
+    private fun navigateToDetailActivity(idPokemon: Int, namePokemon: String) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("idPokemon", idPokemon)
+        intent.putExtra("namePokemon", namePokemon)
+        startActivity(intent)
     }
 }

@@ -44,7 +44,8 @@ class PokemonRepositoryImpl @Inject constructor(
                     }
                 }
             }
-            apiPokemonResponse.pokemon = apiPokemonResponse.pokemon.filter { it.id <= LIMIT_POKEMON_LIST }
+            apiPokemonResponse.pokemon =
+                apiPokemonResponse.pokemon.filter { it.id <= LIMIT_POKEMON_LIST }
             //Clear and save again the values.
             pokemonDao.clearPokemon()
             pokemonDao.clearType()
@@ -52,6 +53,10 @@ class PokemonRepositoryImpl @Inject constructor(
             pokemonDao.insertType(apiTypesResponse.map { it.toRoom() })
         }
         return apiPokemonResponse
+    }
+
+    override suspend fun getPokemonByID(idPokemon: Int): String {
+        return pokemonDao.getPokemonByID(idPokemon)
     }
 
     private suspend fun getAPIPokemonList(): PokemonListState {
@@ -85,7 +90,7 @@ class PokemonRepositoryImpl @Inject constructor(
             runCatching { pokemonApiService.getType(type) }.onSuccess { response ->
                 response.pokemon.forEach { pokemon ->
                     typeResponse.add(
-                        TypeModel(id = response.id,
+                        TypeModel(id = 0,
                             name = response.name,
                             typeSlot = pokemon.slot,
                             namePokemon = pokemon.pokemon.name,
@@ -137,18 +142,26 @@ class PokemonRepositoryImpl @Inject constructor(
 
     private suspend fun getAPIPokemon(namePokemon: String): PokemonInfoModel? {
         val roomInfoResponse = pokemonDao.getPokemonInfo(namePokemon)
-        if (roomInfoResponse.id != 0) {
+        if (roomInfoResponse != null) {
             return roomInfoResponse.toDomain()
         }
         runCatching {
             pokemonApiService.getPokemon(namePokemon)
         }.onSuccess { pokemonInfoResponse ->
+            var legacy = ""
+            var latest = ""
+            if (pokemonInfoResponse.cries.legacy != null) {
+                legacy = pokemonInfoResponse.cries.legacy
+            }
+            if (pokemonInfoResponse.cries.latest != null) {
+                latest = pokemonInfoResponse.cries.latest
+            }
             val apiPokemonInfoResponse = PokemonInfoModel(
                 id = pokemonInfoResponse.id,
                 name = pokemonInfoResponse.name,
                 abilities = pokemonInfoResponse.abilities.map { it.ability.name },
-                legacyCries = pokemonInfoResponse.cries.legacy,
-                latestCries = pokemonInfoResponse.cries.latest,
+                legacyCries = legacy,
+                latestCries = latest,
                 baseExperience = pokemonInfoResponse.baseExperience,
                 hpStat = pokemonInfoResponse.stats[0].baseStat,
                 attackStat = pokemonInfoResponse.stats[1].baseStat,
@@ -183,34 +196,38 @@ class PokemonRepositoryImpl @Inject constructor(
 
     private suspend fun getAPIAbility(abilities: List<String>): List<AbilityModel>? {
         val roomAbilityResponse = mutableListOf<AbilityEntity>()
+        var roomAbilityEntity: AbilityEntity
         abilities.forEach { nameAbility ->
-            roomAbilityResponse.add(pokemonDao.getAbility(nameAbility))
+            roomAbilityEntity = pokemonDao.getAbility(nameAbility)
+            if (roomAbilityEntity != null) {
+                roomAbilityResponse.add(pokemonDao.getAbility(nameAbility))
+            }
         }
         if (roomAbilityResponse.isNotEmpty()) {
             return roomAbilityResponse.map { it.toDomain() }
         }
-        var nameAbility = ""
-        var descriptionAbility = ""
+        var spanishNameAbility = ""
+        var spanishDescriptionAbility = ""
         val apiAbilityResponse = mutableListOf<AbilityModel>()
-        apiAbilityResponse.forEach { ability ->
+        abilities.forEach { nameAbility ->
             runCatching {
-                pokemonApiService.getAbility(ability.name)
+                pokemonApiService.getAbility(nameAbility)
             }.onSuccess { response ->
                 response.flavorTextEntries.forEach {
                     if (it.language.name == "es") {
-                        nameAbility = it.flavorText
+                        spanishDescriptionAbility = it.flavorText
                     }
                 }
                 response.names.forEach {
                     if (it.language.name == "es") {
-                        descriptionAbility = it.name
+                        spanishNameAbility = it.name
                     }
                 }
                 apiAbilityResponse.add(
                     AbilityModel(
                         id = response.id,
-                        name = nameAbility,
-                        description = descriptionAbility
+                        name = spanishNameAbility,
+                        description = spanishDescriptionAbility
                     )
                 )
             }.onFailure {
@@ -225,7 +242,7 @@ class PokemonRepositoryImpl @Inject constructor(
 
     private suspend fun getAPISpecies(namePokemon: String): SpeciesModel? {
         val roomSpeciesResponse = pokemonDao.getSpecies(namePokemon)
-        if (roomSpeciesResponse.id != 0) {
+        if (roomSpeciesResponse != null) {
             return roomSpeciesResponse.toDomain()
         }
         runCatching {
@@ -234,6 +251,7 @@ class PokemonRepositoryImpl @Inject constructor(
             val idEvolutionChain = extractIdUrl(pokemonSpeciesResponse.evolutionChain.url)
             var descriptionSpecies = ""
             var pokemonClass = ""
+            var habitat = ""
             pokemonSpeciesResponse.flavorTextEntries.forEach {
                 if (it.language.name == "es") {
                     descriptionSpecies = it.flavorText
@@ -244,6 +262,9 @@ class PokemonRepositoryImpl @Inject constructor(
                     pokemonClass = it.genus
                 }
             }
+            if (pokemonSpeciesResponse.habitat != null) {
+                habitat = pokemonSpeciesResponse.habitat.name
+            }
             val apiPokemonSpeciesResponse = SpeciesModel(
                 id = pokemonSpeciesResponse.id,
                 name = pokemonSpeciesResponse.name,
@@ -252,7 +273,7 @@ class PokemonRepositoryImpl @Inject constructor(
                 idEvolutionChain = idEvolutionChain,
                 description = descriptionSpecies,
                 pokemonClass = pokemonClass,
-                habitat = pokemonSpeciesResponse.habitat.name,
+                habitat = habitat,
                 isBaby = pokemonSpeciesResponse.isBaby,
                 isLegendary = pokemonSpeciesResponse.isLegendary,
                 isMythical = pokemonSpeciesResponse.isMythical
@@ -277,7 +298,17 @@ class PokemonRepositoryImpl @Inject constructor(
             pokemonApiService.getEvolution(idEvolutionChain)
         }.onSuccess { pokemonEvolutionResponse ->
             val apiEvolutionResponse = mutableListOf<EvolutionModel>()
+            var firstItem = ""
+            var secondItem = ""
+            var firstLocation = ""
+            var secondLocation = ""
             pokemonEvolutionResponse.chain.evolvesTo.forEach { evolvesToFirst ->
+                if (evolvesToFirst.evolutionDetails[0].item != null) {
+                    firstItem = evolvesToFirst.evolutionDetails[0].item.name
+                }
+                if (evolvesToFirst.evolutionDetails[0].location != null) {
+                    firstLocation = evolvesToFirst.evolutionDetails[0].location.name
+                }
                 apiEvolutionResponse.add(
                     EvolutionModel(
                         id = 0,
@@ -285,15 +316,21 @@ class PokemonRepositoryImpl @Inject constructor(
                         namePokemon = pokemonEvolutionResponse.chain.species.name,
                         idPokemonEvolution = extractIdUrl(evolvesToFirst.species.url),
                         nameEvolution = evolvesToFirst.species.name,
-                        itemEvolution = evolvesToFirst.evolutionDetails[0].item.name,
+                        itemEvolution = firstItem,
                         minLevel = evolvesToFirst.evolutionDetails[0].minLevel,
                         trigger = evolvesToFirst.evolutionDetails[0].trigger.name,
                         happiness = evolvesToFirst.evolutionDetails[0].minHappiness,
                         timeOfDay = evolvesToFirst.evolutionDetails[0].timeOfDay,
-                        location = evolvesToFirst.evolutionDetails[0].location.name
+                        location = firstLocation
                     )
                 )
                 evolvesToFirst.evolvesTo.forEach { evolvesToSecond ->
+                    if (evolvesToSecond.evolutionDetails[0].item != null) {
+                        secondItem = evolvesToSecond.evolutionDetails[0].item.name
+                    }
+                    if (evolvesToSecond.evolutionDetails[0].location != null) {
+                        secondLocation = evolvesToSecond.evolutionDetails[0].location.name
+                    }
                     apiEvolutionResponse.add(
                         EvolutionModel(
                             id = 0,
@@ -301,12 +338,12 @@ class PokemonRepositoryImpl @Inject constructor(
                             namePokemon = evolvesToFirst.species.name,
                             idPokemonEvolution = extractIdUrl(evolvesToSecond.species.url),
                             nameEvolution = evolvesToSecond.species.name,
-                            itemEvolution = evolvesToSecond.evolutionDetails[0].item.name,
+                            itemEvolution = secondItem,
                             minLevel = evolvesToSecond.evolutionDetails[0].minLevel,
                             trigger = evolvesToSecond.evolutionDetails[0].trigger.name,
                             happiness = evolvesToSecond.evolutionDetails[0].minHappiness,
                             timeOfDay = evolvesToSecond.evolutionDetails[0].timeOfDay,
-                            location = evolvesToSecond.evolutionDetails[0].location.name
+                            location = secondLocation
                         )
                     )
                 }

@@ -56,7 +56,7 @@ dependencies {
     //Glide
     implementation(libs.glide)
 
-    //Glide
+    //Lottie
     implementation(libs.android.lottie)
 
     //DaggerHilt
@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment.ktx)
 
     //UnitTesting
     testImplementation(libs.junit)

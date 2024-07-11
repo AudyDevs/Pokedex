@@ -2,12 +2,18 @@
 <resources>
     <!--App Basics-->
     <color name="background">#FF000000</color>
+    <color name="backgroundTransparent">#4D000000</color>
     <color name="error">#D13135</color>
     <color name="buttonAllTypes">#80838283</color>
     <color name="text">#FFFFFFFF</color>
     <color name="textList">#FF000000</color>
 
     <color name="transparent">#00FFFFFF</color>
+
+    <!--Types Pokemon-->
+    <color name="baby">#F8835E</color>
+    <color name="legendary">#54AEF6</color>
+    <color name="mythical">#89CC8C</color>
 
     <!--Background Types Pokemon-->
     <color name="background_bug">#B1D370</color>
@@ -48,4 +54,12 @@
     <color name="rock">#FFC7B78B</color>
     <color name="steel">#FF5A8EA1</color>
     <color name="water">#FF4D90D5</color>
+
+    <!--Basic Color Stats Pokemon-->
+    <color name="hp">#FF5A59</color>
+    <color name="attack">#FFAD76</color>
+    <color name="defense">#FEDE74</color>
+    <color name="specialAttack">#92B8F7</color>
+    <color name="specialDefense">#8DDB8A</color>
+    <color name="speed">#FF8DAE</color>
 </resources>

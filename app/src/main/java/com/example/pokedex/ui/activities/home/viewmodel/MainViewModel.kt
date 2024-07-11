@@ -3,7 +3,7 @@ package com.example.pokedex.ui.activities.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.core.DispatcherProvider
-import com.example.pokedex.di.Constants.ONE_COLUMN_LIST
+import com.example.pokedex.di.Constants.TWO_COLUMN_LIST
 import com.example.pokedex.domain.state.PokemonListState
 import com.example.pokedex.domain.usecase.GetPokemonListUseCase
 import com.example.pokedex.domain.usecase.ReadColumnsListUseCase
@@ -34,10 +34,10 @@ class MainViewModel @Inject constructor(
     private val _pokemonListState = MutableStateFlow<PokemonListState>(PokemonListState.Loading)
     val pokemonListState: StateFlow<PokemonListState> = _pokemonListState
 
-    private val _columnsList = MutableStateFlow(ONE_COLUMN_LIST)
+    private val _columnsList = MutableStateFlow(TWO_COLUMN_LIST)
     val columnsList: StateFlow<Int> = _columnsList
 
-    private val _darkMode = MutableStateFlow<Boolean?>(null)
+    private val _darkMode = MutableStateFlow<Boolean?>(false)
     val darkMode: StateFlow<Boolean?> = _darkMode
 
     private val _pokemonType = MutableStateFlow<String?>(null)

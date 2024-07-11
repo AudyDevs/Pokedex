@@ -18,6 +18,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon ORDER BY id ASC")
     suspend fun getPokemon(): List<PokemonEntity>
 
+    @Query("SELECT name FROM pokemon WHERE id = :id")
+    suspend fun getPokemonByID(id: Int): String
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPokemon(pokemonList: List<PokemonEntity>)
 
@@ -35,7 +38,7 @@ interface PokemonDao {
     suspend fun clearPokemonInfo()
 
     // Type
-    @Query("SELECT * FROM type WHERE name = :namePokemon")
+    @Query("SELECT * FROM type WHERE namePokemon = :namePokemon")
     suspend fun getType(namePokemon: String): List<TypeEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

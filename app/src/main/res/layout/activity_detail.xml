@@ -7,4 +7,254 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.detail.view.DetailActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_pokeball_grey"
+            app:tint="@color/textList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/cd_icon"/>
+
+        <TextView
+            android:id="@+id/tvIdText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textList"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivBack"
+            tools:text="@string/toolsId" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textList"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="28dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvIdText"
+            app:layout_constraintEnd_toStartOf="@id/ivCries"
+            tools:text="@string/toolsPokemon" />
+
+        <ImageView
+            android:id="@+id/ivCries"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="13dp"
+            android:src="@drawable/ic_volume"
+            app:tint="@color/textList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv3d"
+            android:contentDescription="@string/cd_icon"/>
+
+        <ImageView
+            android:id="@+id/iv3d"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_3d"
+            app:tint="@color/textList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/cd_icon"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="48dp"
+        app:layout_constraintTop_toTopOf="@id/layoutName"
+        app:layout_constraintBottom_toBottomOf="@id/layoutType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/ic_solrock"
+        android:contentDescription="@string/cd_icon" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="6dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivPreviousPokemon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:cardElevation="0dp"
+            android:layout_marginStart="6dp"
+            app:cardBackgroundColor="@color/backgroundTransparent"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/text"
+                android:contentDescription="@string/cd_icon"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivNextPokemon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:cardElevation="0dp"
+            android:layout_marginEnd="6dp"
+            app:cardBackgroundColor="@color/backgroundTransparent"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_forward"
+                app:tint="@color/text"
+                android:contentDescription="@string/cd_icon"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/fire"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPreviousPokemon"
+            app:layout_constraintEnd_toStartOf="@id/ivType2">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ivIconType1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_type_fire"
+                    android:contentDescription="@string/cd_icon"/>
+                <TextView
+                    android:id="@+id/ivTextType1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    tools:text="Fire"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/text"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivType2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/fire"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivType1"
+            app:layout_constraintEnd_toStartOf="@id/ivNextPokemon">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ivIconType2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_type_fire"
+                    android:contentDescription="@string/cd_icon"/>
+                <TextView
+                    android:id="@+id/ivTextType2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center"
+                    tools:text="Fire"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/text"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="12dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:tabGravity="center"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
+        app:tabTextColor="@color/text"
+        android:background="@color/transparent"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="24dp"/>
+    </ScrollView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/ivLottieAnimation"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

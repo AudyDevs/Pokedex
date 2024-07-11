@@ -2,7 +2,7 @@ package com.example.pokedex.core.extensions
 
 import com.example.pokedex.R
 
-fun String.backgroundColorType(): Int {
+fun String.backgroundColorTypeList(): Int {
     return when (this) {
         "bug" -> R.color.background_bug
         "dark" -> R.color.background_dark
@@ -22,6 +22,30 @@ fun String.backgroundColorType(): Int {
         "rock" -> R.color.background_rock
         "steel" -> R.color.background_steel
         "water" -> R.color.background_water
+        else -> R.color.background
+    }
+}
+
+fun String.backgroundColorType(): Int {
+    return when (this) {
+        "bug" -> R.color.bug
+        "dark" -> R.color.dark
+        "dragon" -> R.color.dragon
+        "electric" -> R.color.electric
+        "fairy" -> R.color.fairy
+        "fighting" -> R.color.fighting
+        "fire" -> R.color.fire
+        "flying" -> R.color.flying
+        "ghost" -> R.color.ghost
+        "grass" -> R.color.grass
+        "ground" -> R.color.ground
+        "ice" -> R.color.ice
+        "normal" -> R.color.normal
+        "poison" -> R.color.poison
+        "psychic" -> R.color.psychic
+        "rock" -> R.color.rock
+        "steel" -> R.color.steel
+        "water" -> R.color.water
         else -> R.color.background
     }
 }
@@ -47,5 +71,29 @@ fun String.iconPokemonType(): Int {
         "steel" -> R.drawable.ic_type_steel
         "water" -> R.drawable.ic_type_water
         else -> R.drawable.ic_pokeball
+    }
+}
+
+fun String.textPokemonType(): String {
+    return when (this) {
+        "bug" -> "Bicho"
+        "dark" -> "Oscuro"
+        "dragon" -> "Dragón"
+        "electric" -> "Eléctrico"
+        "fairy" -> "Hada"
+        "fighting" -> "Lucha"
+        "fire" -> "Fuego"
+        "flying" -> "Volador"
+        "ghost" -> "Fantasma"
+        "grass" -> "Hierba"
+        "ground" -> "Tierra"
+        "ice" -> "Hielo"
+        "normal" -> "Normal"
+        "poison" -> "Veneno"
+        "psychic" -> "Psíquico"
+        "rock" -> "Roca"
+        "steel" -> "Acero"
+        "water" -> "Agua"
+        else -> ""
     }
 }

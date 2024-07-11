@@ -5,13 +5,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pokedex.core.extensions.backgroundColorType
+import com.example.pokedex.core.extensions.backgroundColorTypeList
+import com.example.pokedex.core.extensions.formatIdPokemon
+import com.example.pokedex.core.extensions.formatNamePokemon
 import com.example.pokedex.core.extensions.iconPokemonType
 import com.example.pokedex.databinding.ItemPokemonOneColumnBinding
 import com.example.pokedex.databinding.ItemPokemonTwoColumnsBinding
 import com.example.pokedex.di.Constants.ONE_COLUMN_LIST
 import com.example.pokedex.domain.model.PokemonListModel
-import java.util.Locale
 
 class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -28,19 +29,15 @@ class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 layoutCard.setCardBackgroundColor(
                     ContextCompat.getColor(
                         layoutCard.context,
-                        pokemon.typeSlot1.backgroundColorType()
+                        pokemon.typeSlot1.backgroundColorTypeList()
                     )
                 )
                 tvId.text = pokemon.id.toString()
                 Glide.with(ivIcon.context)
                     .load(pokemon.imageLittle)
                     .into(ivIcon)
-                tvIdText.text = String.format("#%04d", pokemon.id)
-                tvName.text = pokemon.name.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.ROOT
-                    ) else it.toString()
-                }
+                tvIdText.text = pokemon.id.formatIdPokemon()
+                tvName.text = pokemon.name.formatNamePokemon()
                 if (pokemon.typeSlot1.isNotEmpty()) {
                     ivType1.setImageResource(pokemon.typeSlot1.iconPokemonType())
                 }
@@ -57,19 +54,15 @@ class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 layoutCard.setCardBackgroundColor(
                     ContextCompat.getColor(
                         layoutCard.context,
-                        pokemon.typeSlot1.backgroundColorType()
+                        pokemon.typeSlot1.backgroundColorTypeList()
                     )
                 )
                 tvId.text = pokemon.id.toString()
                 Glide.with(ivIcon.context)
                     .load(pokemon.imageBig)
                     .into(ivIcon)
-                tvIdText.text = String.format("#%04d", pokemon.id)
-                tvName.text = pokemon.name.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.ROOT
-                    ) else it.toString()
-                }
+                tvIdText.text = pokemon.id.formatIdPokemon()
+                tvName.text = pokemon.name.formatNamePokemon()
                 if (pokemon.typeSlot1.isNotEmpty()) {
                     ivType1.setImageResource(pokemon.typeSlot1.iconPokemonType())
                 }

@@ -11,4 +11,25 @@
     <!--contentDescription-->
     <string name="cd_icon">Icon</string>
     <string name="cd_type">Type</string>
+
+    <!--About fragment-->
+    <string name="pokemonType">Tipo:</string>
+    <string name="baby">Bebé</string>
+    <string name="legendary">Legendario</string>
+    <string name="mythical">Mítico</string>
+    <string name="height">Altura:</string>
+    <string name="weight">Peso:</string>
+    <string name="habitat">Hábitat:</string>
+    <string name="happiness">Felicidad:</string>
+    <string name="captureRate">Tasa captura:</string>
+    <string name="abilities">Habilidades:</string>
+
+    <!--Stats fragment-->
+    <string name="hpStat">Vida</string>
+    <string name="attackStat">Ataque</string>
+    <string name="defenseStat">Defensa</string>
+    <string name="specialAttackStat">At. Esp.</string>
+    <string name="specialDefenseStat">Df. Esp.</string>
+    <string name="speedStat">Veloc.</string>
+    <string name="baseExperience">Experiencia:</string>
 </resources>
