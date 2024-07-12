@@ -129,7 +129,7 @@ class DetailActivity : AppCompatActivity() {
         binding.viewPager.adapter = ViewPagerAdapter(this)
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Info"
+                0 -> tab.text = "Inform."
                 1 -> tab.text = "Stats"
                 2 -> tab.text = "Defensas"
                 3 -> tab.text = "Evolución"

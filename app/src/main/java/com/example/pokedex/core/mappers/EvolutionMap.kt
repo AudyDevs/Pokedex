@@ -6,6 +6,7 @@ import com.example.pokedex.domain.model.EvolutionModel
 fun EvolutionEntity.toDomain() = EvolutionModel(
     id = id,
     idEvolution = idEvolution,
+    idPokemonOrigin = idPokemonOrigin,
     namePokemon = namePokemon,
     idPokemonEvolution = idPokemonEvolution,
     nameEvolution = nameEvolution,
@@ -20,6 +21,7 @@ fun EvolutionEntity.toDomain() = EvolutionModel(
 fun EvolutionModel.toRoom() = EvolutionEntity(
     id = id,
     idEvolution = idEvolution,
+    idPokemonOrigin = idPokemonOrigin,
     namePokemon = namePokemon,
     idPokemonEvolution = idPokemonEvolution,
     nameEvolution = nameEvolution,

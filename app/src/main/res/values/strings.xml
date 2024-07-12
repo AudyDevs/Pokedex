@@ -32,4 +32,18 @@
     <string name="specialDefenseStat">Df. Esp.</string>
     <string name="speedStat">Veloc.</string>
     <string name="baseExperience">Experiencia:</string>
+
+    <!--Defenses fragment-->
+    <string name="DamageX4">[x4] Muy débil contra …</string>
+    <string name="DamageX2">[x2] Débil contra …</string>
+    <string name="DamageX1">[x1] Daño normal contra …</string>
+    <string name="DamageX05">[x0.5] Resistente contra …</string>
+    <string name="DamageX025">[x0.25] Muy resistente contra …</string>
+    <string name="DamageX0">[x0] Inmune contra …</string>
+
+    <!--Evolution fragment-->
+    <string name="level">Nivel:</string>
+    <string name="item">Objeto:</string>
+    <string name="timeOfDay">Tiempo:</string>
+    <string name="location">Ubicación:</string>
 </resources>

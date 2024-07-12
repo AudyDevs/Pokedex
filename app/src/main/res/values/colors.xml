@@ -6,6 +6,7 @@
     <color name="error">#D13135</color>
     <color name="buttonAllTypes">#80838283</color>
     <color name="text">#FF000000</color>
+    <color name="textTransparent">#80000000</color>
     <color name="textList">#FF000000</color>
 
     <color name="transparent">#00FFFFFF</color>

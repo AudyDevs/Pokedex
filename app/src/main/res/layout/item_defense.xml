@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ivType1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    app:cardBackgroundColor="@color/fire"
+    app:cardCornerRadius="50dp"
+    app:cardElevation="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/ivType2"
+    app:layout_constraintStart_toEndOf="@id/ivPreviousPokemon"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivIconType1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cd_icon"
+            android:src="@drawable/ic_type_fire" />
+
+        <TextView
+            android:id="@+id/ivTextType1"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:textColor="@color/text"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Fire" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

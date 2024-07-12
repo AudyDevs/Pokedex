@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.pokedex.ui.fragments.AboutFragment
-import com.example.pokedex.ui.fragments.DefensesFragment
+import com.example.pokedex.ui.fragments.DefenseFragment
 import com.example.pokedex.ui.fragments.EvolutionFragment
 import com.example.pokedex.ui.fragments.StatsFragment
 
@@ -16,7 +16,7 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
         return when (position) {
             0 -> AboutFragment()
             1 -> StatsFragment()
-            2 -> DefensesFragment()
+            2 -> DefenseFragment()
             3 -> EvolutionFragment()
             else -> AboutFragment()
         }

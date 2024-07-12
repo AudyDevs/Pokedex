@@ -313,6 +313,7 @@ class PokemonRepositoryImpl @Inject constructor(
                     EvolutionModel(
                         id = 0,
                         idEvolution = idEvolutionChain,
+                        idPokemonOrigin = extractIdUrl(pokemonEvolutionResponse.chain.species.url),
                         namePokemon = pokemonEvolutionResponse.chain.species.name,
                         idPokemonEvolution = extractIdUrl(evolvesToFirst.species.url),
                         nameEvolution = evolvesToFirst.species.name,
@@ -335,6 +336,7 @@ class PokemonRepositoryImpl @Inject constructor(
                         EvolutionModel(
                             id = 0,
                             idEvolution = idEvolutionChain,
+                            idPokemonOrigin = extractIdUrl(evolvesToFirst.species.url),
                             namePokemon = evolvesToFirst.species.name,
                             idPokemonEvolution = extractIdUrl(evolvesToSecond.species.url),
                             nameEvolution = evolvesToSecond.species.name,
