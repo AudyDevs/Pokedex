@@ -1,10 +1,8 @@
 package com.example.pokedex.ui.activities.detail.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.core.DispatcherProvider
-import com.example.pokedex.domain.model.PokemonModel
 import com.example.pokedex.domain.state.PokemonInfoState
 import com.example.pokedex.domain.usecase.GetPokemonByIDUseCase
 import com.example.pokedex.domain.usecase.GetPokemonInfoUseCase
