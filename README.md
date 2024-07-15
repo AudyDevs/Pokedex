@@ -19,7 +19,6 @@
 - [Glide](https://github.com/bumptech/glide): Nos permite representar imagenes a traves de una URL.
 - [Lottie](https://github.com/airbnb/lottie-android): Nos permite representar animaciones a través de un JSON.
 - [Dagger Hilt](https://dagger.dev/hilt/) para inyección de dependencias.
-- Navigation component: Es una parte de la suite de Jetpack que simplifica la implementación de la navegación en las Activities y los Fragments.
 - Datastore preferences: Nos permite almacenar datos en local de forma asíncrona. Ideal para guardar preferencias de usuario y configuraciones de la aplicación.
 - Testing
 - Código con Clean Code y Clean Architecture
@@ -30,9 +29,15 @@
 [PokeAPI](https://pokeapi.co/) proporciona una interfaz API RESTful con objetos muy detallados creados a partir de miles de líneas de datos relacionados con Pokémon.
 
 ## 📱 Capturas
-| Main | Menu 1 | Menu 2 |
+| One column list | Two columns list | White mode |
 |--|--|--|
-| <img src="" width="245" height="500"> | <img src="" width="245" height="500"> | <img src="" width="245" height="500">
+| <img src="/previews/ListPokemonOneColumn.webp" width="245" height="500"> | <img src="/previews/ListPokemonTwoColumns.webp" width="245" height="500"> | <img src="/previews/ListPokemonWhiteMode.webp" width="245" height="500">
+| Type filter | Detail info | Detail stats |
+|--|--|--|
+| <img src="/previews/FilteredType.webp" width="245" height="500"> | <img src="/previews/DetailPokemonInfo.webp" width="245" height="500"> | <img src="/previews/DetailPokemonStats.webp" width="245" height="500">
+| Detail defense | Detail evolution |
+|--|--|
+| <img src="/previews/DetailPokemonDefense.webp" width="245" height="500"> | <img src="/previews/DetailPokemonEvolution.webp" width="245" height="500">
 
 ## 👇 Descargar 👇
 Ir a [Releases](https://github.com/AudyDevs/Pokedex/releases) para descargar el último APK.
