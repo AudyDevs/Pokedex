@@ -32,9 +32,11 @@
 | One column list | Two columns list | White mode |
 |--|--|--|
 | <img src="/previews/ListPokemonOneColumn.webp" width="245" height="500"> | <img src="/previews/ListPokemonTwoColumns.webp" width="245" height="500"> | <img src="/previews/ListPokemonWhiteMode.webp" width="245" height="500">
+
 | Type filter | Detail info | Detail stats |
 |--|--|--|
 | <img src="/previews/FilteredType.webp" width="245" height="500"> | <img src="/previews/DetailPokemonInfo.webp" width="245" height="500"> | <img src="/previews/DetailPokemonStats.webp" width="245" height="500">
+
 | Detail defense | Detail evolution |
 |--|--|
 | <img src="/previews/DetailPokemonDefense.webp" width="245" height="500"> | <img src="/previews/DetailPokemonEvolution.webp" width="245" height="500">
