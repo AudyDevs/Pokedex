@@ -97,7 +97,7 @@ object PokedexMotherObject {
         "TypeSlot1Test",
         "TypeSlot2Test"
     )
-    val anyPokemonListEntity = PokemonEntity(
+    val anyPokemonEntity = PokemonEntity(
         1,
         "PokemonNameTest",
         "UrlTest",
@@ -106,6 +106,7 @@ object PokedexMotherObject {
         "TypeSlot1Test",
         "TypeSlot2Test"
     )
+    val anyListPokemonEntity = listOf(anyPokemonEntity, anyPokemonEntity)
     val anySpeciesModel = SpeciesModel(
         1,
         "SpeciesNameTest",

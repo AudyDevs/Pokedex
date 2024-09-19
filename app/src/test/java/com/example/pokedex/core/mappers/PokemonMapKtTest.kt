@@ -1,6 +1,6 @@
 package com.example.pokedex.core.mappers
 
-import com.example.pokedex.motherobject.PokedexMotherObject.anyPokemonListEntity
+import com.example.pokedex.motherobject.PokedexMotherObject.anyPokemonEntity
 import com.example.pokedex.motherobject.PokedexMotherObject.anyPokemonListModel
 import io.kotlintest.shouldBe
 import org.junit.Test
@@ -28,7 +28,7 @@ class PokemonMapKtTest {
     @Test
     fun `toDomain should return a correct PokemonListModel`() {
         //Given
-        val pokemonListEntity = anyPokemonListEntity
+        val pokemonListEntity = anyPokemonEntity
 
         //When
         val pokemonListModel = pokemonListEntity.toDomain()
